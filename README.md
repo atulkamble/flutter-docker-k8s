@@ -18,15 +18,95 @@ flutter-k8s-app/
 ---
 
 ## 🧱 Step 1: Create a Flutter Web App
+Here's a **complete minimal Flutter web app** you can use for the `flutter-k8s-webapp` project. This includes the full Flutter project with a basic homepage, ready to build for web and deploy using Docker + Kubernetes.
+
+---
+
+## 📁 Project Folder: `flutter_app/`
+
+### Step-by-Step to Generate
+
+If you're building from scratch:
 
 ```bash
 flutter create flutter_app
 cd flutter_app
+```
+
+---
+
+### ✅ Updated Code: `lib/main.dart`
+
+Replace the default content with:
+
+```dart
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter K8s App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const HomePage(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('🚀 Flutter on Kubernetes'),
+      ),
+      body: const Center(
+        child: Text(
+          'Hello from Flutter running in Docker on Kubernetes!',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 22),
+        ),
+      ),
+    );
+  }
+}
+```
+
+---
+
+### ⚙️ Web App Build
+
+Run this to generate web files:
+
+```bash
 flutter build web
 ```
 
-> ⚠️ Ensure the Flutter version supports web (`flutter channel stable && flutter upgrade`)
+It will create output in:
 
+```
+flutter_app/build/web/
+```
+
+This will be copied in your Docker image and served using NGINX.
+
+---
+
+## 📝 Optional Updates
+
+* In `pubspec.yaml`, no extra packages are required for this basic app.
+* You can style it further using `GoogleFonts`, `Lottie`, etc. if needed.
 ---
 
 ## 🐳 Step 2: Dockerize Flutter Web App
